@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
+	<classpathentry kind="lib" path="lib/dtj.jar"/>
+	<classpathentry kind="lib" path="lib/icu4j.jar"/>
+	<classpathentry kind="lib" path="lib/sas.analytics.eminer.jsutil.jar"/>
+	<classpathentry kind="lib" path="lib/sas.core.jar"/>
+	<classpathentry kind="lib" path="lib/sas.core.nls.jar"/>
+	<classpathentry kind="lib" path="lib/sas.icons.contents.jar"/>
+	<classpathentry kind="lib" path="lib/sas.icons.jar"/>
+	<classpathentry kind="lib" path="lib/sas.icons.nls.jar"/>
+	<classpathentry kind="lib" path="lib/sas.nls.collator.jar"/>
+	<classpathentry kind="lib" path="lib/tkjava.jar"/>
+	<classpathentry kind="lib" path="lib/tkjava.nls.jar"/>
+	<classpathentry kind="lib" path="lib/commons-logging-1.0.4.jar"/>
+	<classpathentry kind="lib" path="lib/javacsv.jar"/>
+	<classpathentry kind="lib" path="lib/sas.security.sspi.jar"/>
+	<classpathentry kind="lib" path="lib/sas.svc.connection.jar"/>
+	<classpathentry kind="lib" path="lib/log4j.jar"/>
+	<classpathentry kind="lib" path="lib/log4j.over.slf4j_1.6.4.jar"/>
+	<classpathentry kind="lib" path="lib/eminer.user.Score.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
