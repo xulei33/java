@@ -1,0 +1,59 @@
+web auth配置
+中间层
+1、将webAuth.jar包上传至/sas/sasconfig/Lev1/Web/WebAppServer/SASServer1_1/lib目录
+
+2、将form_authentication_adapter.jsp上传至/sas/sasconfig/Lev1/Web/WebAppServer/SASServer1_1/sas_webapps/sas.svcs.logon.war目录
+vi _authentication_adapter.jsp
+将其中的www.sasmid1.cibt全部替换为当前中间层的主机名
+
+
+
+3、
+cd /sas/sasconfig/Lev1/Web/WebAppServer/SASServer1_1/conf/
+vi jaas.config
+末尾添加
+/** Web Auth **/
+
+WebAuth{
+        com.sas.webAuth.WebAuthLoginModule required
+                "debug"="true"
+                ;
+};
+保存退出
+
+4、
+vi server.xml
+找到<Real className这一行，将这一行替换为如下一行
+<Realm className="org.apache.catalina.realm.JAASRealm" appName="WebAuth" userClassNames="java.security.Principal"  useContextClassLoader="true" allRolesMode="authOnly"/>
+保存退出
+
+5、
+cd /sas/sasconfig/Lev1/Web/WebAppServer/SASServer1_1/sas_webapps/sas.svcs.logon.war/WEB-INF
+vi web.xml
+找到Enable FORM authentication这一段，将这一行到末尾的内容替换为
+    <!-- Enable FORM authentication -->
+    <!--    -->
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>HTMLHostManager and HostManager commands</web-resource-name>
+            <url-pattern>/login</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>*</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <login-config>
+        <auth-method>FORM</auth-method>
+        <form-login-config>
+            <form-login-page>/form_authentication_adapter.jsp</form-login-page>
+            <form-error-page>/formLoginError</form-error-page>
+        </form-login-config>
+        <realm-name>Tomcat Host Manager Application</realm-name>
+    </login-config>
+
+</web-app>
+保存退出
+
+
+6、
+cp /sas/sasconfig/Lev1/Web/WebAppServer/SASServer1_1/sas_webapps/sas.svcs.logon.war/js/jquery.js /sas/sasconfig/Lev1/Web/WebAppServer/SASServer1_1/sas_webapps/sas.svcs.logon.war
