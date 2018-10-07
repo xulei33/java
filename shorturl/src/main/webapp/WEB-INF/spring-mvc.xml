@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+	<!-- Enable mvc:annotation-driven -->
+	<mvc:annotation-driven />
+
+	<!-- Register Controller via DispatcherServlet in web.xml -->
+	<context:component-scan base-package="org.*" use-default-filters="false">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>
+
+	<!-- static resources -->
+	<mvc:resources mapping="/static/**" location="/WEB-INF/static/" cache-period="31536000" />
+	<mvc:default-servlet-handler />
+
+	<!-- HttpHeader -->
+	<mvc:interceptors>
+		<bean class="org.springframework.web.servlet.mvc.WebContentInterceptor">
+			<property name="cacheSeconds" value="0" />
+			<property name="useExpiresHeader" value="true" />
+			<property name="useCacheControlHeader" value="true" />
+			<property name="useCacheControlNoStore" value="true" />
+			<property name="alwaysUseFullPath" value="true" />
+		</bean>
+	</mvc:interceptors>
+
+	<!-- REST中根据URL后缀自动判定Content-Type及相应的View -->
+	<bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
+		<property name="mediaTypes">
+			<map>
+				<entry key="xml" value="application/xml" />
+				<entry key="json" value="application/json" />
+			</map>
+		</property>
+		<property name="ignoreAcceptHeader" value="true" />
+		<property name="favorPathExtension" value="true" />
+	</bean>
+
+	<!-- org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping -->
+	<mvc:annotation-driven content-negotiation-manager="contentNegotiationManager">
+		<mvc:message-converters register-defaults="true">
+			<bean id="stringView" class="org.springframework.http.converter.StringHttpMessageConverter">
+				<constructor-arg value="UTF-8" />
+			</bean>
+			<!--json -->
+			<bean id="jsonView" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+				<property name="supportedMediaTypes" value="application/json;charset=UTF-8"></property>
+				<property name="prettyPrint" value="true" />
+			</bean>
+			<!-- xml -->
+			<bean id="xmlView" class="org.springframework.http.converter.xml.MarshallingHttpMessageConverter">
+				<constructor-arg>
+					<bean class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
+						<property name="packagesToScan" value="com.sishuok.mvc.entity" />
+					</bean>
+				</constructor-arg>
+				<property name="supportedMediaTypes" value="application/xml"></property>
+			</bean>
+		</mvc:message-converters>
+	</mvc:annotation-driven>
+	
+	<!-- jsp -->
+	<bean id="jspView" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
+		<property name="prefix" value="/WEB-INF/jsp/" />
+		<property name="suffix" value=".jsp"></property>
+	</bean>
+
+	<!-- uploadFile -->
+	<bean id="commonsMultipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!--1024**1024*5=5M -->
+		<property name="maxUploadSize" value="5242880" />
+	</bean>
+
+</beans>

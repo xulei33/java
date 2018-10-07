@@ -37,7 +37,7 @@ public class BatchScore {
 
 			reader.close();
 
-			// 遍历读取的CSV文件
+
 			for (int row = 0; row < csvFileList.size(); row++) {
 				Map<String, Object> map = new HashMap<String, Object>(2000);
 				String[] val = csvFileList.get(row);
@@ -125,14 +125,14 @@ public class BatchScore {
 	}
 
 	public static void writeCSV(ArrayList<String[]> rsts, String rstFilePath) {
-		// 定义一个CSV路径
+
 		try {
-			// 创建CSV写对象 例如:CsvWriter(文件路径，分隔符，编码格式);
+
 			CsvWriter csvWriter = new CsvWriter(rstFilePath, ',', Charset.forName("UTF-8"));
-			// 写表头
+
 			String[] csvHeaders = { "ID", "EM_CLASSIFICATION", "EM_EVENTPROBABILITY", "EM_PROBABILITY", "_WARN_" };
 			csvWriter.writeRecord(csvHeaders);
-			// 写内容
+
 			for (String[] rst : rsts) {
 				csvWriter.writeRecord(rst);
 			}

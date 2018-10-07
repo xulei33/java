@@ -1,0 +1,23 @@
+2018年9月8日ACP考试费用3900，支付时间：	2018-07-20 16:02:22 发票号：27050804
+还未收到发票，麻烦帮核查下。联系电话 13632212529 徐雷
+
+
+mysqld --initialize --console
+root@localhost: w6tZlH6SGW>0
+
+
+
+CREATE DATABASE `bbs` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+
+INSERT INTO `sysusers` (`userId`,`enabled`,`fullName`,`issys`,`securityDigest`,`userAccount`,`userDesc`,`userDuty`,`userPassword`) VALUES ('bca28d71cf2342fb8442aa4dd52463b3',b'1','admin',b'1','f02cbf23ca5147a98f2db430d7833324','admin',NULL,'管理员','$2a$10$tUxLN5TU7lvdNc0/mdXzZOF9OVrpwXW7T3WXZrty.Ob04DSFIsySe')
+
+/admin/login.htm
+
+演示网站前台(电脑版手机版自适应)
+网址：http://bbs.diyhi.com/
+演示账号：test
+演示密码：1234567
+演示网站后台(电脑版)
+网址：http://bbs.diyhi.com/admin/login.htm
+演示账号：test
+演示密码：1234567
