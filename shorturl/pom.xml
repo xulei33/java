@@ -20,7 +20,7 @@
 			<dependency>
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-framework-bom</artifactId>
-				<version>4.3.8.RELEASE</version>
+				<version>4.3.19.RELEASE</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
@@ -54,6 +54,7 @@
 			<artifactId>spring-jdbc </artifactId>
 		</dependency>
 		<!-- End spring-jdbc -->
+		
 		<!-- Begin Web -->
 		<dependency>
 			<groupId>javax.servlet.jsp</groupId>
@@ -219,8 +220,8 @@
 				</excludes>
 			</resource>
 		</resources>
+		
 		<plugins>
-
 			<!-- mvn clean compile -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -267,7 +268,7 @@
 					<stopPort>8089</stopPort>
 				</configuration>
 			</plugin>
-			
+
 
 			<!-- 生成javadoc文档包的插件 -->
 			<plugin>
